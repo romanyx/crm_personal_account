@@ -1,0 +1,27 @@
+development:
+  host: 172.28.200.3
+  port: 3306
+  adapter: mysql2
+  database: bgbilling_development
+  username: bill
+  password: bgbilling
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: mysql2
+  database: smartspace_test
+  username: root
+  password:
+  pool: 5
+  timeout: 5000
+
+production:
+  host: 194.54.152.48
+  port: 3306
+  adapter: mysql2
+  database: bgbilling
+  username: bill
+  password: bgbilling
+  pool: 5
+  timeout: 5000
