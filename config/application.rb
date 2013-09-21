@@ -73,5 +73,14 @@ module CrmPersonalAccount
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.to_prepare do
+      Devise::SessionsController.layout "authenticate"
+      #Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "registration" }
+      #Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "authenticate" : "authenticate" }
+      #Devise::ConfirmationsController.layout "authenticate"
+      #Devise::UnlocksController.layout "authenticate"            
+      #Devise::PasswordsController.layout "authenticate"        
+    end
   end
 end

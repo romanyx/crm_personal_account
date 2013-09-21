@@ -1,0 +1,119 @@
+@import "variables.css.sass"
+
+html, body
+  height: 100%
+section, header, footer
+  display: block
+.all
+  background-color: #028ed1
+/*scelet*/    
+.wrapper
+  margin-top: 30px
+  .container
+    .row
+      .col-lg-3
+        .sidebar
+          .logo
+            img
+              margin: 0 auto
+          ul.nav.nav-stacked
+            margin-top: 10px
+            border-radius: 5px
+            li
+              a.active
+                background-color: $light-grey
+                color: $windy
+              
+                &:hover
+                  background-color: $light-grey
+                  color: $windy
+              a
+                border-radius: 5px
+                font-weight: 300
+                font-size: 16px
+                text-align: center
+                color: darken($dark-grey, 15)
+              
+                &:after
+                  content: "\e080"
+                  font-size: 12px
+                  font-weight: 300
+                  padding-top: 5px
+                  float: right
+                  display: inline-block
+                  font-family: 'Glyphicons Halflings'
+                  -webkit-font-smoothing: antialiased
+                  font-style: normal
+                  font-weight: normal
+                  color: $light-grey
+                  line-height: 1           
+      .col-lg-9
+        .content
+          h4.contract_information
+            background-color: $light-grey
+            padding: 20px 40px 17px 20px
+            border-bottom: 3px solid $grey
+            font-weight: 400
+            font-size: 18px
+          .contact_submit
+            width: 100%
+            font-size: 16px
+            margin: 5px 0
+            padding: 20px
+          #contacts
+            margin-left: 7px
+            .contact_submit
+              width: 100%
+              font-size: 16px
+              margin: 5px 0
+              padding: 20px
+            .checkbox
+              font-size: 16px
+              margin-left: 12px
+
+            .form-control
+              border: none
+              box-shadow: none
+              border-bottom: 1px dashed $dark-grey
+              font-size: 16px
+                
+              &:focus
+                box-shadow: none
+                border-color: $dark-grey
+            .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control
+              cursor: not-allowed
+              background-color: #fff
+            
+          .balance
+            .summa
+              font-size: 20px
+              text-align: center
+              .limit
+                font-size: 20px
+                text-align: center
+              .green
+                color: #47a447
+              .red
+                color: #b94a48
+          .contacts
+            .contact_info
+              border-radius: 5px
+              padding: 5px
+              
+              &:hover
+                background-color: #f3f3f3
+                
+              label
+                color: darken($dark-grey, 10)
+                font-size: 16px
+                padding: 5px 10px
+                font-weight: 300 
+                margin-top: 5px
+              i
+                dispay: block
+                float: left
+                margin: 0px 10px 0px 10px
+                padding: 10px
+                border-radius: 50%
+                border: 2px solid $dark-grey
+                color: $dark-grey

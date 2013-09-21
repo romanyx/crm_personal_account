@@ -1,8 +1,12 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.14'
-gem 'mysql2'
+gem 'mysql2', '~> 0.3.13'
 gem 'mongoid'
+gem 'devise'
+gem 'inherited_resources'
+gem 'has_scope'
+gem "active_model_serializers"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -14,7 +18,7 @@ group :assets do
   #gem 'compass-rails'
   gem 'uglifier', '>= 1.0.3'
   #gem "jquery-fileupload-rails"
-  gem 'bootstrap-sass'
+  gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass', branch: '3'
   #gem 'angular-rails'
   #gem 'showdown-rails'
 end

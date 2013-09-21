@@ -1,0 +1,5 @@
+%h4.contract_information Статус
+= form_tag("status", id: "status") do
+  .form-group
+    = select_tag("status", options_for_select([['Активен', 1], ['Приостановлен', 2]], 1), class: "form-control")
+  = button_tag 'Изменить статус', class: 'contact_submit btn btn-primary btn-large'
