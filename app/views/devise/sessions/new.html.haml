@@ -1,0 +1,11 @@
+.border-form-div
+  %h2 Авторизация
+  = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    = f.input :title, required: false, autofocus: true
+    = f.input :password, required: false
+    - if devise_mapping.rememberable?
+      %label.checkbox
+        = f.input :remember_me, as: :boolean
+        Rembmer me
+    = f.submit "Войти", class: 'btn btn-primary'
+  = render "devise/shared/links"
