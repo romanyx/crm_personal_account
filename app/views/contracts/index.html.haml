@@ -1,0 +1,41 @@
+%h4.contract_information 
+  Данные
+.contacts
+  .contact_info{"data-original-title" => "ФИО"}
+    %i.glyphicon.glyphicon-user
+    %label
+      = current_contract.comment
+  .contact_info{"data-original-title" => "Номер договора"}
+    %i.glyphicon.glyphicon-book
+    %label
+      = current_contract.title
+  - current_contract.contract_parameter_type3.where(pid:8).limit(1).each do |e|
+    .contact_info{"data-original-title" => "Электронная почта"}
+      %i.glyphicon.glyphicon-envelope
+      %label
+        = e.email
+  - current_contract.ctariffs("date2 is NULL").each do |tp|
+    .contact_info{"data-original-title" => "Тариф"}
+      %i.glyphicon.glyphicon-usd
+      %label
+        = tp.tariffplan.title
+  - current_contract.dialupaliases.each do |login1|
+    .contact_info{"data-original-title" => "Логин"}
+      %i.glyphicon.glyphicon-dashboard.login
+      %label
+        = login1.login_alias
+  - current_contract.inet_services.each do |login2|
+    .contact_info{"data-original-title" => "Логин"}
+      %i.glyphicon.glyphicon-dashboard.login
+      %label
+        = login2.login
+%h4.contract_information Контактная информация
+= form_tag("contracts", id: "contracts") do
+  .form-group
+    - current_contract.contract_parameter_type3.where(pid:8).limit(1).each do |e|
+      = email_field_tag("contact[fio]", e.email, {class: 'form-control', "data-original-title" => "Электронная почта"})
+    .checkbox
+      %label
+        = check_box_tag 'sms', '', true
+        Смс рассылка о состоянии баланса
+    = button_tag 'Обновить данные', class: 'contact_submit btn btn-primary btn-large'
