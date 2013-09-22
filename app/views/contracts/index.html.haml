@@ -19,23 +19,28 @@
       %i.glyphicon.glyphicon-usd
       %label
         = tp.tariffplan.title
-  - current_contract.dialupaliases.each do |login1|
+  - current_contract.dialupaliases.each do |login|
     .contact_info{"data-original-title" => "Логин"}
       %i.glyphicon.glyphicon-dashboard.login
       %label
-        = login1.login_alias
-  - current_contract.inet_services.each do |login2|
+        = login.login_alias
+  - current_contract.inet_services.each do |login|
     .contact_info{"data-original-title" => "Логин"}
       %i.glyphicon.glyphicon-dashboard.login
       %label
-        = login2.login
+        = login.login
 %h4.contract_information Контактная информация
-= form_tag("contracts", id: "contracts") do
+= form_tag("contracts/update_contract", id: "contracts") do
   .form-group
-    - current_contract.contract_parameter_type3.where(pid:8).limit(1).each do |e|
-      = email_field_tag("contact[fio]", e.email, {class: 'form-control', "data-original-title" => "Электронная почта"})
+    - email = current_contract.contract_parameter_type3.where(pid:8).limit(1).last
+    - if email.nil?
+      = email_field_tag("email", "", {class: 'form-control', "data-original-title" => "Электронная почта"})
+    - else
+      = email_field_tag("email", email.email, {class: 'form-control', "data-original-title" => "Электронная почта"})
     .checkbox
       %label
-        = check_box_tag 'sms', '', true
+        - sms = current_contract.flags.where(pid:46).limit(1).last
+        - sms.nil? ? sms = 0 : sms = sms.val
+        = check_box_tag 'sms', sms, sms == 0 ? false : true
         Смс рассылка о состоянии баланса
     = button_tag 'Обновить данные', class: 'contact_submit btn btn-primary btn-large'
