@@ -1,5 +1,5 @@
 class ContractsController < InheritedResources::Base
-	before_filter :authenticate_contract!
+  before_filter :authenticate_contract!
   respond_to :html
   actions :index
 
@@ -7,6 +7,5 @@ class ContractsController < InheritedResources::Base
   end
   
   def status
-  	
   end
 end
