@@ -7,4 +7,7 @@ class Flag < ActiveRecord::Base
   #pid 47 = Email рассылка
   #pid 48 = Изменение статуса
   #pid 56 = Наличие подписаного договора
+  attr_accessible :pid, :cid, :val
+
+  validates :val, :pid, :cid, presence: true
 end

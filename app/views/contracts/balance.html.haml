@@ -10,10 +10,9 @@
         Лимит: 
         %b= current_contract.closesumma
         грн.
--if current_contract.balance_days_left <= 5
-  %br
-  .alert.alert-danger Пополните счет
 = link_to "Оплатить кредитной картой", "#", class: 'contact_submit btn btn-primary btn-large'
+%br/
+%br/
 %table.table
   %thead
     %tr.active
@@ -21,7 +20,7 @@
       %th Комментарий
       %th Дата
   %tbody
-    - current_contract.payments.each do |p|
+    - @payments.each do |p|
       %tr
         %td 
           = p.summa 
@@ -30,3 +29,4 @@
           = p.comment
         %td 
           = p.dt.strftime("%d.%m.%Y")
+= will_paginate @payments, renderer: BootstrapPagination::Rails, bootstrap: 3, param_name: 'id'

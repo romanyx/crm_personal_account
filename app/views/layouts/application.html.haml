@@ -17,14 +17,19 @@
                 %li
                   = link_to "Профиль", root_path, class: current_page?(root_path) && 'active'
                 %li
-                  = link_to "Баланс", balance_contracts_path, class: current_page?(balance_contracts_path) && 'active'
+                  = link_to "Баланс", balance_contract_path(1), class: current_page?(balance_contract_path(params[:id]||=1)) && 'active'
                 %li
                   = link_to "Статус", status_contracts_path, class: current_page?(status_contracts_path) && 'active' 
                 %li
                   = link_to "Выйти", destroy_contract_session_path, :method => :delete
           .col-lg-9
             %section.content
-              .alert.alert-success.alert.alert-dismissable
-                Вы вошли!
-                %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
+              - if flash[:notice]
+                .alert.alert-success.alert.alert-dismissable
+                  = flash[:notice]
+                  %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
+              - if flash[:error]
+                .alert.alert-danger.alert.alert-dismissable
+                  = flash[:error]
+                  %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
               = yield
