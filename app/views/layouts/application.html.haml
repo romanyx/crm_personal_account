@@ -24,7 +24,4 @@
                   = link_to "Выйти", destroy_contract_session_path, :method => :delete
           .col-lg-9
             %section.content
-              .alert.alert-success.alert.alert-dismissable
-                Вы вошли!
-                %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
               = yield
