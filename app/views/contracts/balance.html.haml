@@ -21,7 +21,7 @@
       %th Комментарий
       %th Дата
   %tbody
-    - current_contract.payments.each do |p|
+    - @contracts.each do |p|
       %tr
         %td 
           = p.summa 
@@ -30,3 +30,4 @@
           = p.comment
         %td 
           = p.dt.strftime("%d.%m.%Y")
+= will_paginate @contracts,previous_label: "Назад", next_label: "Вперед", renderer: BootstrapPagination::Rails, bootstrap: 3
