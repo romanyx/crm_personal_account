@@ -2,5 +2,9 @@
 
 FactoryGirl.define do
   factory :flag do
+    factory :sms do
+      pid 46
+      val 1
+    end
   end
 end
