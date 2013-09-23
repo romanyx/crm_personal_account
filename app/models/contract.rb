@@ -40,8 +40,11 @@ class Contract < ActiveRecord::Base
   has_many :contract_parameter_type7_values, :through => :contract_parameter_type7
 
   has_many :contract_parameter_type8, :class_name => 'ContractParameterType8', :foreign_key => 'cid'
+  has_many :contract_statuses, :class_name => 'ContractStatus', :foreign_key => 'cid'
+  has_many :contract_status_logs, :class_name => 'ContractStatusLog', :foreign_key => 'cid'
   has_many :inet_services, class_name: 'InetService', foreign_key: 'contractId'
 
+  STATUS = ['Активен', 'В отключении', 'Отключен', 'Закрыт', 'Приостановлен', 'В подключении']
   
 
   devise :database_authenticatable, :authentication_keys => [:title] 

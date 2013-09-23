@@ -1,5 +1,30 @@
 %h4.contract_information Статус
-= form_tag("status", id: "status") do
-  .form-group
-    = select_tag("status", options_for_select([['Активен', 1], ['Приостановлен', 2]], 1), class: "form-control")
-  = button_tag 'Изменить статус', class: 'contact_submit btn btn-primary btn-large'
+= simple_form_for ContractStatusLog.new, url: change_status_contracts_path, method: :post do |f|
+  = f.input :status, collection: [['Активен', 0], ['Приостановлен', 4]], input_html: { class: "form-control" }, selected: current_contract.status
+  = f.input :date1
+  = f.input :date2
+  = f.button :submit, value: 'Изменить статус', class: 'contact_submit btn btn-primary btn-large', disabled: ![0, 4].include?(current_contract.status)
+%br/
+%br/
+%table.table
+  %thead
+    %tr.active
+      %th Cтатус
+      %th Комментарий
+      %th С даты
+      %th По дату
+      %th Статус установлен
+  %tbody
+    - @statuses.each do |p|
+      %tr
+        %td 
+          = Contract::STATUS[p.status]
+        %td
+          = p.comment
+        %td 
+          = p.date1
+        %td 
+          = p.date2
+        %td 
+          = p.date.strftime("%d.%m.%Y %H:%M")
+= will_paginate @statuses, renderer: BootstrapPagination::Rails, bootstrap: 3, param_name: 'id'
