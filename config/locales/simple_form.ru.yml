@@ -12,14 +12,18 @@ ru:
       default_message: "Обнаружены следующие проблемы:"
     # Labels and hints examples
     labels:
-      feedback:
+      contract:
         new:
-          email: "Email"
-          text: "Текст"
+          title: "Номер договора"
+          password: "Пароль"
+      contract_status_log:
+        status: "Статус"
+        date1: "Начало действия с"
+        date2: "Конец действия с"
     placeholders:
-      feedback:
-        new:
-          text: "Введите текст сообщения"
+      contract_status_log:
+        date1: "Нажмите на поле для выбора даты"
+        date2: "Нажмите на поле для выбора даты"
     #   defaults:
     #     password: 'Password'
     #   user:
