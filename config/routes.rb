@@ -1,6 +1,9 @@
 CrmPersonalAccount::Application.routes.draw do
- 
+
   root to: 'contracts#index'
+
+  mount EcconnectRails::Engine => "/ecconnect_rails", :as => "ecconnect"
+
   devise_for :contracts 
   resources :contracts, only: [:index] do
     collection do

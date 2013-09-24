@@ -86,6 +86,10 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.4)
+    ecconnect_rails (0.0.3)
+      mongoid (>= 3.0.0)
+      mongoid-autoinc (>= 0.3.0)
+      rails (>= 3.2)
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.0.1)
@@ -132,6 +136,10 @@ GEM
       moped (~> 1.4)
       origin (~> 1.0)
       tzinfo (~> 0.3.22)
+    mongoid-autoinc (0.5.1)
+      activesupport
+      mongoid (~> 3.0)
+      rake
     mongoid-rspec (1.8.2)
       mongoid (>= 3.0.1)
       rake
@@ -276,6 +284,7 @@ DEPENDENCIES
   date_validator
   delayed_job_mongoid
   devise
+  ecconnect_rails (>= 0.0.3)
   factory_girl_rails
   figaro
   haml
