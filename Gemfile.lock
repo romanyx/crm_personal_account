@@ -296,6 +296,7 @@ DEPENDENCIES
   cache_digests
   capybara
   coffee-rails (~> 3.2.1)
+  daemons
   database_cleaner
   date_validator
   delayed_job_mongoid
