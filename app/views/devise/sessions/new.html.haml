@@ -1,8 +1,8 @@
 .border-form-div
-  %h2 Авторизация
-  = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-    = f.input :title, required: false, autofocus: true
-    = f.input :password, required: false
+  /%h2 Авторизация
+  = simple_form_for resource, as: resource_name, url: session_path(resource_name), :defaults => { :input_html => { :class => "form-control" } } do |f|
+    = f.input :title, required: false, autofocus: true, input_html: { class: 'form-control text-control' }
+    = f.input :password, required: false, input_html: { class: 'form-control text-control' }
     - if devise_mapping.rememberable?
       %label.checkbox
         = f.input :remember_me, as: :boolean

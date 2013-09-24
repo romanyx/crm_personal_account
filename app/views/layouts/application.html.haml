@@ -19,7 +19,7 @@
                 %li
                   = link_to "Баланс", balance_contract_path(1), class: current_page?(balance_contract_path(params[:id]||=1)) && 'active'
                 %li
-                  = link_to "Статус", status_contracts_path, class: current_page?(status_contracts_path) && 'active' 
+                  = link_to "Статус", status_contract_path(1), class: current_page?(status_contract_path(params[:id]||=1)) && 'active' 
                 %li
                   = link_to "Выйти", destroy_contract_session_path, :method => :delete
           .col-lg-9

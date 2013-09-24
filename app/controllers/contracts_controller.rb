@@ -12,6 +12,11 @@ class ContractsController < InheritedResources::Base
   end
   
   def status
+    @status = current_contract.contract_status_logs.build
+    if ![0, 4].include?(current_contract.status)
+      flash[:error] = Contract::STATUS[current_contract.status] + ', статус невозможно изменить'
+    end
+    @statuses = current_contract.contract_status_logs.order('date DESC').paginate(page: params[:id], per_page: 5)
   end
 
   def update_contract
@@ -26,11 +31,24 @@ class ContractsController < InheritedResources::Base
   end
 
   def change_status
-    #СontractStatus.create status: 4, uid: 0, data1: Дата начала, date2: Дата конца, comment: 'Установлено пользователем'
-    #СontractStatusLog.create status: 4, uid: 0, data1: Дата начала, date2: Дата конца, comment: 'Установлено пользователем', date: Time.now
+    if params[:contract_status_log][:status].to_i == current_contract.status
+      redirect_to status_contract_path(1), flash: { error: 'Данный статус уже установлен' }
+    elsif [0, 4].include?(params[:contract_status_log][:status].to_i)
+      @status = current_contract.contract_status_logs.build(params[:contract_status_log].merge(comment: 'Установлено пользователем', date: Time.now, uid: 0))
+      if @status.save && current_contract.contract_statuses.build(params[:contract_status_log].merge(comment: 'Установлено пользователем', uid: 0)).save
+        redirect_to status_contract_path(1), flash: { notice: 'Статус поставлен в очередь' }
+      else
+        @statuses = current_contract.contract_status_logs.order('date DESC').paginate(page: (params[:id]||=1), per_page: 5)
+        flash[:error] = 'Ошбика при изменении статуса'
+        render 'status'
+      end
+    else
+      redirect_to status_contract_path(1), flash: { error: 'Данный статус невозможно изменить' }
+    end
   end
 
 private
+
   def update_email email
   	if email.nil?
       email = current_contract.contract_parameter_type3.build(pid: 8, email: params[:email])
@@ -42,7 +60,7 @@ private
   end
 
   def update_sms sms
-    if params[:sms].to_i == 0 || params[:sms].nil?
+    if params[:sms].nil?
       if sms.nil?
         sms = current_contract.flags.build(pid: 46, val: 0)
         sms.save

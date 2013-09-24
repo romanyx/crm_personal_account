@@ -7,11 +7,13 @@ gem 'devise'
 gem 'inherited_resources'
 gem 'has_scope'
 gem "active_model_serializers"
+gem 'date_validator'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'jquery-rails'
+  gem 'bootstrap-datepicker-rails'
   #gem 'haml_coffee_assets'
   #gem 'execjs'
   #gem 'normalize-rails'

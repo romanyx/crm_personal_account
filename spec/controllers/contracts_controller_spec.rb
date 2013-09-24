@@ -37,6 +37,7 @@ describe ContractsController do
     end
     context 'authorized' do
       it{ response.should render_template 'status' }
+      it{ assigns(:statuses).should == contract.contract_status_logs.order('date DESC').paginate(page: 1, per_page: 5) }
     end
   end
 
