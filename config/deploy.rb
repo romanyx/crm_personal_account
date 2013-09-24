@@ -31,4 +31,4 @@ role :db,  domain, primary: true
 ssh_options[:forward_agent] = true
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "id_rsa")]
 
-after "delayed_job:restart"
+after "deploy", "delayed_job:restart"
