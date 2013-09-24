@@ -12,6 +12,7 @@ class ContractsController < InheritedResources::Base
   end
   
   def status
+    @status = current_contract.contract_status_logs.build
     if ![0, 4].include?(current_contract.status)
       flash[:error] = Contract::STATUS[current_contract.status] + ', статус невозможно изменить'
     end
@@ -30,31 +31,23 @@ class ContractsController < InheritedResources::Base
   end
 
   def change_status
-    p params[:contract_status_log][:date1]
-    if [0, 4].include? params[:status].to_i
-      update_status params[:status].to_i, params[:start_time], params[:end_time]
-      redirect_to status_contracts_path, flash: { notice: 'Статус поставлен в очередь' }
+    if params[:contract_status_log][:status].to_i == current_contract.status
+      redirect_to status_contract_path(1), flash: { error: 'Данный статус уже установлен' }
+    elsif [0, 4].include?(params[:contract_status_log][:status].to_i)
+      @status = current_contract.contract_status_logs.build(params[:contract_status_log].merge(comment: 'Установлено пользователем', date: Time.now, uid: 0))
+      if @status.save && current_contract.contract_statuses.build(params[:contract_status_log].merge(comment: 'Установлено пользователем', uid: 0)).save
+        redirect_to status_contract_path(1), flash: { notice: 'Статус поставлен в очередь' }
+      else
+        @statuses = current_contract.contract_status_logs.order('date DESC').paginate(page: (params[:id]||=1), per_page: 5)
+        flash[:error] = 'Ошбика при изменении статуса'
+        render 'status'
+      end
     else
-      redirect_to status_contracts_path, flash: { error: 'Данный статус невозможно изменить' }
+      redirect_to status_contract_path(1), flash: { error: 'Данный статус невозможно изменить' }
     end
   end
 
 private
-
-  def update_status contract_status_log
-    if Date.new(contract_status_log['date1(1i)'], contract_status_log['date1(2i)', contract_status_log['date1(3i)']]) <= Date.now
-      contract_status_log['date1(1i)'] = Date.now.year
-      contract_status_log['date1(2i)'] = Date.now.month
-      contract_status_log['date1(3i)'] = Date.now.day
-    end
-    if !contract_status_log['date2(1i)'].nil? && Date.new(contract_status_log['date2(1i)'], contract_status_log['date2(2i)', contract_status_log['date2(3i)']]) <= Date.now
-      contract_status_log['date2(1i)'] = Date.now.year
-      contract_status_log['date2(2i)'] = Date.now.month
-      contract_status_log['date2(3i)'] = Date.now.day
-    end
-    current_contract.contract_status.create params[:contract_status_log].merge(comment: 'Установлено пользователем')
-    current_contract.contract_status_log.create params[:contract_status_log].merge(comment: 'Установлено пользователем', date: Time.now)   
-  end
 
   def update_email email
   	if email.nil?
@@ -67,7 +60,7 @@ private
   end
 
   def update_sms sms
-    if params[:sms].to_i == 0 || params[:sms].nil?
+    if params[:sms].nil?
       if sms.nil?
         sms = current_contract.flags.build(pid: 46, val: 0)
         sms.save

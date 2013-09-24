@@ -60,6 +60,11 @@ class Contract < ActiveRecord::Base
     pswd
   end
 
+  def password=(new_password)
+    @password = new_password
+    #self.encrypted_password = password_digest(@password) if @password.present?
+  end
+
   def self.tariffs_array(id)
     array = []
     tarray = []

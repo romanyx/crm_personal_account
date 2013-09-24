@@ -36,7 +36,7 @@
     - if email.nil?
       = email_field_tag("email", "", {class: 'form-control', "data-original-title" => "Электронная почта"})
     - else
-      = email_field_tag("email", email.email, {class: 'form-control', "data-original-title" => "Электронная почта"})
+      = email_field_tag("email", email.email, {class: 'form-control text-control', "data-original-title" => "Электронная почта"})
     .checkbox
       %label
         - sms = current_contract.flags.where(pid:46).limit(1).last
