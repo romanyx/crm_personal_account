@@ -9,6 +9,7 @@ gem 'has_scope'
 gem "active_model_serializers"
 gem 'date_validator'
 gem 'ecconnect_rails', '>= 0.0.3'
+gem 'rvm-capistrano'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
