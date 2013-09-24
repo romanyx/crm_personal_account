@@ -15,13 +15,13 @@
                 = image_tag('logo.jpg', class: "img-responsive")
               %ul.nav.nav-stacked
                 %li
-                  = link_to "Профиль", root_path, class: current_page?(root_path) && 'active'
+                  = link_to "Профиль", main_app.root_path, class: current_page?(main_app.root_path) && 'active'
                 %li
-                  = link_to "Баланс", balance_contract_path(1), class: current_page?(balance_contract_path(params[:id]||=1)) && 'active'
+                  = link_to "Баланс", main_app.balance_contract_path(1), class: current_page?(main_app.balance_contract_path(params[:id]||=1)) && 'active'
                 %li
-                  = link_to "Статус", status_contract_path(1), class: current_page?(status_contract_path(params[:id]||=1)) && 'active' 
+                  = link_to "Статус", main_app.status_contract_path(1), class: current_page?(main_app.status_contract_path(params[:id]||=1)) && 'active' 
                 %li
-                  = link_to "Выйти", destroy_contract_session_path, :method => :delete
+                  = link_to "Выйти", main_app.destroy_contract_session_path, :method => :delete
           .col-lg-9
             %section.content
               - if flash[:notice]
