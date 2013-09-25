@@ -65,49 +65,6 @@ class Contract < ActiveRecord::Base
     #self.encrypted_password = password_digest(@password) if @password.present?
   end
 
-  def self.tariffs_array(id)
-    array = []
-    tarray = []
-    allsums = 0
-    fincost = 0
-    id = Contract.find(id)
-    id.ctariffs.where("date2 is NULL").each do |tp|
-      title = tp.tariffplan.title
-      tp.tariffplan.moduletarifftrees.each do |md|
-        mtreen = md.mtreenodes.where("type LIKE '%_cost'").find(:all, :select => "type as etype, data")[0]
-        if mtreen != nil
-          fincost = mtreen.data.gsub(/(.+)&/,"")
-          allsums += fincost.to_i
-        end
-      end
-      tarray << {:title => title , :cost => fincost }
-    end
-    pfincost = 0
-    id.contracttreelinks.where("date2 is NULL").each do |ptp|
-      title = ptp.title
-      ptp.moduletarifftrees.each do |pmd|
-        pmtreen = pmd.mtreenodes.where("type LIKE '%_cost'").find(:all, :select => "type as etype, data")[0]
-        if pmtreen != nil
-          pfincost = pmtreen.data.gsub(/(.+)&/,"")
-          allsums += pfincost.to_i
-        end
-      end
-      tarray << {:title => title , :cost => pfincost }
-    end
-    return array << {"tplans" => tarray, "allcost" => allsums}
-  end
-
-  def self.tariffs_all
-    File.open(Rails.root.join('public/kirill.txt'), 'a') do |file|
-      ContractParameterType7Value.where(id:[100,109,110,73,74,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92]).order("title ASC").each do |r|
-        file.puts "       #{r.title}"
-        r.contracts.each do |c|
-          file.puts "#{c.comment} - #{Contract.tariffs_array(c.id)[0]["allcost"]}"
-        end
-      end
-    end
-  end
-
   def mobile_phone
     allowed = %w[+38050 +38066 +38095 +38099 +38067 +38096 +38097 +38098 +38063 +38093 +38068 +38091 +38092]
     phone = self.phones.where(pid: 14).first
@@ -122,10 +79,6 @@ class Contract < ActiveRecord::Base
         nil
       end
     end
-  end
-
-  def current_balance
-    Balance.by_cmy self.id, Time.now.month, Time.now.year
   end
 
   def last_balance
@@ -154,20 +107,4 @@ class Contract < ActiveRecord::Base
       0
     end
   end
-
-  def self.cached_users id=0
-    Rails.cache.fetch("cached_users_for#{id}", expires_in: 30.minutes) do
-      contracts = Contract.joins(:contract_parameter_type7).where('contract_parameter_type_7.pid=54')
-      if id.eql?(0)
-        contracts.map do |c|
-          ContractSerializer.new(c, root: false).serializable_hash
-        end
-      else
-        contracts.joins(:contract_parameter_type8).where("contract_parameter_type_8.val=#{id}").map do |c|
-          ContractSerializer.new(c, root: false).serializable_hash
-        end
-      end
-    end
-  end
-
 end

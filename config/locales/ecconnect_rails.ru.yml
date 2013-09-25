@@ -1,0 +1,55 @@
+ru:
+  ecconnect_rails:
+    ecconnect_form:
+      submit: Перейти к оплате
+    success: Операция успшно выполнена
+    wrong_signature: Ошибка подписи
+    codes:
+      code_000: Сделка авторизована
+      code_101: Неверный срок действия карты
+      code_105: Транзакция не разрешена банком-эмитетом
+      code_108: Карта утеряна или украдена
+      code_111: Не существующая карта
+      code_116: Insufficient funds
+      code_130: ПРивышен допустимый лимит расходов
+      code_290: Банк-издатель недоступен
+      code_291: Техническая или коммуникационная проблема
+      code_401: Ошибка формата
+      code_402: Ошибка в параметрах Acquirer/Merchant
+      code_403: Ошибка при соединении с с ресурсом платежной системы
+      code_404: Ошибка аутентификации покупателя
+      code_405: Ошибка подписи
+      code_406: Quota of transactions exceeded
+      code_407: Merchant is not active
+      code_408: Transaction was not found
+      code_409: Too many transactions were found
+      code_410: The order was paid (possible replay)
+      code_411: The order request time is out-of-date
+      code_412: Replay order condition
+      code_413: Unknown card type
+      code_420: The total amount of successful transactions per day is limited
+      code_421: Tran amount limit (non 3-D Secure full authenticated)
+      code_430: Transaction is prohibited by Gateway
+      code_431: Attempted 3D-Secure is not accepted
+      code_432: Card is in stop list
+      code_433: The number of transactions has exceeded the limit
+      code_434: The merchant does not accept cards from the country
+      code_435: CLient IP address is on stop list
+      code_436: The sum of amount transactions has exceeded the limit
+      code_438: Unacceptable currency code
+      code_439: The time limit from request to authorization has been exceeded
+      code_440: The authorization time limit has been exceeded
+      code_441: MPI communication problem
+      code_450: Recurrent payments are prohibited
+      code_501: Транзакция отменена пользователем
+      code_502: Сессия браузера устарела
+      code_503: Транзакция отменена магазином
+      code_504: Transaction was canceled by gateway with reversal
+      code_505: Invalid sequense of operations
+      code_506: Preauthorized transaction is expired
+      code_507: Preauthorized transaction already processed with payment
+      code_508: Invalid amount to pay a preauthorized transaction
+      code_509: Not able to trace back to original transaction
+      code_510: Refund is expired
+      code_511: Transaction was canceled by settlement action
+      code_601: Not completed

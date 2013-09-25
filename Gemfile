@@ -8,7 +8,7 @@ gem 'inherited_resources'
 gem 'has_scope'
 gem "active_model_serializers"
 gem 'date_validator'
-gem 'ecconnect_rails', '>= 0.0.3'
+gem 'ecconnect_rails', '>= 0.0.4'
 gem 'rvm-capistrano'
 gem 'daemons'
 
