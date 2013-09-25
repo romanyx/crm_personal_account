@@ -92,7 +92,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.4)
-    ecconnect_rails (0.0.3)
+    ecconnect_rails (0.0.4)
       mongoid (>= 3.0.0)
       mongoid-autoinc (>= 0.3.0)
       rails (>= 3.2)
@@ -301,7 +301,7 @@ DEPENDENCIES
   date_validator
   delayed_job_mongoid
   devise
-  ecconnect_rails (>= 0.0.3)
+  ecconnect_rails (>= 0.0.4)
   factory_girl_rails
   figaro
   haml

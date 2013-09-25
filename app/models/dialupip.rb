@@ -33,37 +33,5 @@ class Dialupip < ActiveRecord::Base
     ip = IPAddr.new(ipaddr, Socket::AF_INET).to_s
   end
 
-  def self.ipcount
-    File.open(Rails.root.join("ips.txt"), 'r+') do |file|
-      file.each_line { |line|
-        array  = line.gsub(/\n$/, "").split("\ ")
-        login = array[0].gsub(/login\=/, "")
-        ip = array[1].gsub(/ip\=/, "")
-        billing_ip = array[2].gsub(/vip\=/, "") 
-        if Dialupip.where(ip: IPAddr.new(billing_ip).to_i).count > 1
-          self.contract_and_alias(billing_ip)
-        end
-      }
-      file.close
-    end
-  end
-
-  def self.contract_and_alias(ip)
-    Dialupip.where(ip: IPAddr.new(ip).to_i).each{|i|
-      p "#{ip} #{i.contract.title} - #{i.contract.comment}"
-    }
-  end
 
 end
-
-
-#"10.10.131.250 12-015 - Аверьянова Марина Владимировна"
-#"10.10.131.250 12-999 - Зубко тестовые/служебные логины - kometa_test1"
-#"10.10.131.245 12-068 - Рыбалко Ольга "
-#"10.10.131.245 12-074 - Хливная Нина "
-#"10.10.131.240 12-089 - Котельникова"
-#"10.10.131.240 12-090 - Назаров"
-#"10.10.131.209 12-040 - Попова "
-#"10.10.131.209 12-075 - Кайко Ленара Наримановна "
-#"10.10.131.20 12-013 - Зейтулаева Азиме "
-#"10.10.131.20 12-100 - Петров Владимир Юрьевич"
