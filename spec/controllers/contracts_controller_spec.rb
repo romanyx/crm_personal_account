@@ -30,7 +30,7 @@ describe ContractsController do
   end
 
   describe 'GET status' do
-    before{ authorization; get :status }
+    before{ authorization; get :status, { id: 1 }  }
     context 'unauthorized' do
       let(:authorization){ nil }
       it{ response.should redirect_to new_contract_session_path }
@@ -66,7 +66,7 @@ describe ContractsController do
         before{ authorization; post :update_contract, { sms: 0, email: 'my@mail.ru' } }
         it{ response.should redirect_to root_path }
         it{ contract.contract_parameter_type3.where(pid:8).last.email.should == 'my@mail.ru' }
-        it{ contract.flags.where(pid:46).last.val.should == 0 }
+        it{ contract.flags.where(pid:46).last.val.should == 1 }
         it{ contract.contract_parameter_type3.where(pid:8).count.should == 1 }
         it{ contract.flags.where(pid:46).count.should == 1 }
         it{ flash[:notice].should == 'Данные обновлены' }
@@ -76,7 +76,7 @@ describe ContractsController do
           FactoryGirl.create :email, contract: contract
           FactoryGirl.create :sms, contract: contract
           authorization
-          post :update_contract, { sms: 0, email: 'my@mail.ru' }
+          post :update_contract, { email: 'my@mail.ru' }
         end
         it{ response.should redirect_to root_path }
         it{ contract.contract_parameter_type3.where(pid:8).last.email.should == 'my@mail.ru' }
