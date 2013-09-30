@@ -293,3 +293,7 @@ ru:
               before: 'Дата должна раньше чем дата конца'
             date2:
               after: 'Дата должна быть позднее чем дата начала'
+  helpers:
+    submit:
+      ecconnect_payment:
+        create: "Далее"

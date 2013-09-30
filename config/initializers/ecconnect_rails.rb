@@ -1,6 +1,6 @@
-EcconnectRails.default_options = { merchant_id: "1753970", 
-                                   terminal_id: "E7881970", 
-                                   request_url: "https://secure.upc.ua/ecgtest/enter",
-                                   cert_path: Rails.root.join('certs/test-server.cert'),
-                                   pem_path: Rails.root.join('certs/1753970.pem'),
+EcconnectRails.default_options = { merchant_id: "6568977", 
+                                   terminal_id: "E0165172", 
+                                   request_url: "https://secure.upc.ua/go/enter",
+                                   cert_path: Rails.root.join('certs/work-server.cert'),
+                                   pem_path: Rails.root.join('certs/6568977.pem'),
                                    currency_id: 980 }

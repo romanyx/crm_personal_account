@@ -12,7 +12,7 @@ FactoryGirl.define do
     comment "Test"
     del false
     sub_mode 0
-    status 0
+    status 2
     status_date Time.now
   end
 end

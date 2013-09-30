@@ -43,13 +43,14 @@ class Contract < ActiveRecord::Base
   has_many :contract_statuses, :class_name => 'ContractStatus', :foreign_key => 'cid'
   has_many :contract_status_logs, :class_name => 'ContractStatusLog', :foreign_key => 'cid'
   has_many :inet_services, class_name: 'InetService', foreign_key: 'contractId'
+  #has_many :ecconnect_payments, class_name: 'EcconnectRails:EcconnectPayment', foreign_key: 'payer_id'
 
   STATUS = ['Активен', 'В отключении', 'Отключен', 'Закрыт', 'Приостановлен', 'В подключении']
   
 
   devise :database_authenticatable, :authentication_keys => [:title] 
 
-  attr_accessible :title, :pswd, :password, :encrypted_password
+  attr_accessible :title, :pswd, :password, :encrypted_password, :status
   
   def valid_password?(password)
   	return false if pswd.blank?
@@ -81,6 +82,37 @@ class Contract < ActiveRecord::Base
     end
   end
 
+  def update_email email
+    current_email = self.contract_parameter_type3.where(pid: 8).last
+    if current_email.nil?
+      current_email = self.contract_parameter_type3.build(pid: 8, email: email)
+      current_email.save
+    else
+      current_email.update_attributes(email: email) if !current_email.nil?
+    end
+    current_email
+  end
+
+  def update_sms flag
+    sms = self.flags.where(pid: 46).last
+    if flag.nil?
+      if sms.nil?
+        sms = self.flags.build(pid: 46, val: 0)
+        sms.save
+      else
+        sms.update_attributes(val: 0)
+      end
+    else
+      if sms.nil?
+        sms = self.flags.build(pid: 46, val: 1)
+        sms.save
+      else
+        sms.update_attributes(val: 1)
+      end
+    end
+    sms
+  end
+
   def last_balance
     @last_balance ||= get_last_balance
   end
@@ -88,7 +120,9 @@ class Contract < ActiveRecord::Base
   def get_last_balance
     summa = balances.order("yy DESC").first
     if summa.nil?
-      summa = Balance.new summa1: 0, summa2: 0, summa3: 0, summa4: 0
+      summa = Balance.create! summa1: 0, summa2: 0, summa3: 0, summa4: 0, yy: Time.now.year, mm: Time.now.month, cid: self.id
+    elsif summa.mm < Time.now.month || summa.yy < Time.now.year
+      summa = Balance.create! summa1: (summa.summa1 + summa.summa2 - summa.summa3 - summa.summa4), summa2: 0, summa3: 0, summa4: 0, yy: Time.now.year, mm: Time.now.month, cid: self.id
     end
     summa
   end

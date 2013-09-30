@@ -16,10 +16,13 @@ ru:
         new:
           title: "Номер договора"
           password: "Пароль"
+      ecconnect_payment:
+        new:
+          amount: "Сумма"
       contract_status_log:
         status: "Статус"
-        date1: "Начало действия с"
-        date2: "Конец действия с"
+        date1: "С даты"
+        date2: "По дату"
     placeholders:
       contract_status_log:
         date1: "Нажмите на поле для выбора даты"

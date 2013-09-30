@@ -12,16 +12,13 @@ class ContractsController < InheritedResources::Base
   end
   
   def status
-    @status = current_contract.contract_status_logs.build
-    if ![0, 4].include?(current_contract.status)
-      flash[:error] = Contract::STATUS[current_contract.status] + ', статус невозможно изменить'
-    end
+    @status = current_contract.contract_statuses.build
     @statuses = current_contract.contract_status_logs.order('date DESC').paginate(page: params[:id], per_page: 5)
   end
 
   def update_contract
-    email = update_email current_contract.contract_parameter_type3.where(pid: 8).last
-    sms = update_sms current_contract.flags.where(pid: 46).last
+    email = current_contract.update_email params[:email]
+    sms = current_contract.update_sms params[:sms]
     error = (email.errors.full_messages + sms.errors.full_messages).join(', ')
     if error.blank?
       error = nil 
@@ -34,47 +31,17 @@ class ContractsController < InheritedResources::Base
     if params[:contract_status_log][:status].to_i == current_contract.status
       redirect_to status_contract_path(1), flash: { error: 'Данный статус уже установлен' }
     elsif [0, 4].include?(params[:contract_status_log][:status].to_i)
-      @status = current_contract.contract_status_logs.build(params[:contract_status_log].merge(comment: 'Установлено пользователем', date: Time.now, uid: 0))
-      if @status.save && current_contract.contract_statuses.build(params[:contract_status_log].merge(comment: 'Установлено пользователем', uid: 0)).save
+      @status = current_contract.contract_statuses.build(params[:contract_status_log].merge(comment: 'Установлено пользователем', uid: 0))
+      if @status.save
+        current_contract.update_attributes(status: 0) if params[:contract_status_log][:status].to_i == 4
         redirect_to status_contract_path(1), flash: { notice: 'Статус поставлен в очередь' }
       else
         @statuses = current_contract.contract_status_logs.order('date DESC').paginate(page: (params[:id]||=1), per_page: 5)
-        flash[:error] = 'Ошбика при изменении статуса'
+        flash[:error] = 'Ошибка при изменении статуса'
         render 'status'
       end
     else
-      redirect_to status_contract_path(1), flash: { error: 'Данный статус невозможно изменить' }
+      redirect_to status_contract_path(1), flash: { error: Contract::STATUS[current_contract.status] + ', статус невозможно изменить' }
     end
-  end
-
-private
-
-  def update_email email
-  	if email.nil?
-      email = current_contract.contract_parameter_type3.build(pid: 8, email: params[:email])
-      email.save
-    else
-      email.update_attributes(email: params[:email]) if !email.nil?
-    end
-    email
-  end
-
-  def update_sms sms
-    if params[:sms].nil?
-      if sms.nil?
-        sms = current_contract.flags.build(pid: 46, val: 0)
-        sms.save
-      else
-        sms.update_attributes(val: 0)
-      end
-    else
-      if sms.nil?
-        sms = current_contract.flags.build(pid: 46, val: 1)
-        sms.save
-      else
-        sms.update_attributes(val: 1)
-      end
-    end
-    sms
   end
 end

@@ -1,0 +1,3 @@
+= simple_form_for @ecconnect_payment, url: ecconnect.ecconnect_payments_path do |f|
+  = f.input :amount, input_html: { class: 'form-control' }
+  = f.button :submit, class: 'btn-primary contact_submit'
