@@ -6,8 +6,12 @@ module EcconnectRails
 
   private
 
+    def success_respond ecconnect_payment
+      redirect_to main_app.balance_contract_path(1), :status => :moved_permanently
+    end
+
     def forward_url_success
-      main_app.balance_contract_url 1
+      'http://billing.crimeainfo.com/ecconnect_rails/ecconnect_payments/success'
     end
 
     def notify_right_signature ecconnect_payment
