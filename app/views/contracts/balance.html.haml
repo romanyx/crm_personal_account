@@ -28,5 +28,5 @@
         %td 
           = p.comment
         %td 
-          = p.dt.strftime("%d.%m.%Y %H:%M")
+          = p.lm.strftime("%d.%m.%Y %H:%M")
 = will_paginate @payments, renderer: BootstrapPagination::Rails, bootstrap: 3, param_name: 'id'
