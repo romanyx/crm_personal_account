@@ -28,12 +28,12 @@ class ContractsController < InheritedResources::Base
   end
 
   def change_status
-    if params[:contract_status_log][:status].to_i == current_contract.status
+    if params[:contract_status][:status].to_i == current_contract.status
       redirect_to status_contract_path(1), flash: { error: 'Данный статус уже установлен' }
-    elsif [0, 4].include?(params[:contract_status_log][:status].to_i)
-      @status = current_contract.contract_statuses.build(params[:contract_status_log].merge(comment: 'Установлено пользователем', uid: 0))
+    elsif [0, 4].include?(params[:contract_status][:status].to_i)
+      @status = current_contract.contract_statuses.build(params[:contract_status].merge(comment: 'Установлено пользователем', uid: 0))
       if @status.save
-        current_contract.update_attributes(status: 0) if params[:contract_status_log][:status].to_i == 4
+        current_contract.update_attributes(status: 0) if params[:contract_status][:status].to_i == 4
         redirect_to status_contract_path(1), flash: { notice: 'Статус поставлен в очередь' }
       else
         @statuses = current_contract.contract_status_logs.order('date DESC').paginate(page: (params[:id]||=1), per_page: 5)
