@@ -1,13 +1,13 @@
 # coding: utf-8
 module EcconnectRails
   class EcconnectPaymentsController < EcconnectRails::BaseController
-    before_filter :authenticate_contract!
+    before_filter :authenticate_contract!, except: [:notify]
     layout 'application'
 
   private
 
     def forward_url_success
-      main_app.balance_contract_path 1
+      main_app.balance_contract_url 1
     end
 
     def notify_right_signature ecconnect_payment

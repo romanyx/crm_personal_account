@@ -286,7 +286,7 @@ ru:
           attributes:
             val:
               invalid: 'Неверный формат соглашения об рассылке смс'
-        contract_status_log:
+        contract_status:
           attributes:
             date1:
               after: 'Дата должна быть позднее чем сегодня'

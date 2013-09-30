@@ -19,12 +19,12 @@ ru:
       ecconnect_payment:
         new:
           amount: "Сумма"
-      contract_status_log:
+      contract_status:
         status: "Статус"
         date1: "С даты"
         date2: "По дату"
     placeholders:
-      contract_status_log:
+      contract_status:
         date1: "Нажмите на поле для выбора даты"
         date2: "Нажмите на поле для выбора даты"
     #   defaults:
