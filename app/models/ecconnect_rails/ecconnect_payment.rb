@@ -29,6 +29,7 @@ module EcconnectRails
     field :xid, type: String
     field :rrn, type: String
     field :payer_id, type: Integer
+    field :status, type: Boolean, default: false
 
     increments :order_id, seed: 1
 
