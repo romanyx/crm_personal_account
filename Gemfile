@@ -70,3 +70,5 @@ gem 'figaro'
 
 gem 'mongoid_slug'
 gem 'mongoid_auto_inc'
+
+gem 'meta-tags', require: 'meta_tags'
