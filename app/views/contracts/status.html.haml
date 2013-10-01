@@ -26,5 +26,5 @@
         %td 
           = p.date2
         %td 
-          = p.date.strftime("%d.%m.%Y %H:%M")
+          = I18n.l p.date, format: :long
 = will_paginate @statuses, renderer: BootstrapPagination::Rails, bootstrap: 3, param_name: 'id'
