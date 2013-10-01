@@ -1,9 +1,10 @@
 %html
   %head
     %meta{charset: "utf-8"}
-    %title Авторизация
+    = display_meta_tags site: 'ООО Крыминфоком'
     = javascript_include_tag "application"
     = stylesheet_link_tag "application", media: "all"
     = csrf_meta_tag
   %body.all
     = yield
+    

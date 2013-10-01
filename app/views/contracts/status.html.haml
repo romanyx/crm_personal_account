@@ -1,3 +1,4 @@
+- set_meta_tags title: "#{current_contract.title} статус", description: "Ваш статус на текущий момент" , keywords: "Крыминфоком, Инфоком, Infocom, Crimeainfocom, пополнить баланс, статистика, личный кабинет"
 %h4.contract_information Статус
 = simple_form_for @status, url: change_status_contracts_path, method: :post, :defaults => { :input_html => { :class => "form-control" } } do |f|
   = f.input :status, collection: [['Активен', 0], ['Приостановлен', 4]], input_html: { class: "form-control" }, selected: @status.status ||= current_contract.status
@@ -21,10 +22,11 @@
           = Contract::STATUS[p.status]
         %td
           = p.comment
+        %td
+          - p p.date1.class
+          = I18n.l(p.date1, format: :long) if p.date2
         %td 
-          = p.date1
-        %td 
-          = p.date2
+          = I18n.l(p.date2, format: :long) if p.date2
         %td 
           = I18n.l p.date, format: :long
 = will_paginate @statuses, renderer: BootstrapPagination::Rails, bootstrap: 3, param_name: 'id'

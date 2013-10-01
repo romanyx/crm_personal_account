@@ -1,3 +1,4 @@
+- set_meta_tags title: "Авторизация", description: "Авторизация в личный кабинет" , keywords: "Крыминфоком, Инфоком, Infocom, Crimeainfocom, пополнить баланс, статистика, личный кабинет"
 .border-form-div
   /%h2 Авторизация
   = simple_form_for resource, as: resource_name, url: session_path(resource_name), :defaults => { :input_html => { :class => "form-control" } } do |f|
@@ -7,5 +8,5 @@
       %label.checkbox
         = f.input :remember_me, as: :boolean
         Rembmer me
-    = f.submit "Войти", class: 'btn btn-primary'
+    = f.submit "Войти", class: 'btn btn-primary', rel: 'nofollow'
   = render "devise/shared/links"
