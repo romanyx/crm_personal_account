@@ -9,6 +9,10 @@
     %i.glyphicon.glyphicon-book
     %label
       = current_contract.title
+  .contact_info{"data-original-title" => "Статус"}
+    %i{class: "#{current_contract.status == 0 ? 'glyphicon glyphicon-ok-circle ': 'glyphicon glyphicon-ban-circle'}"}
+    %label
+      = Contract::STATUS[current_contract.status]
   - current_contract.contract_parameter_type3.where(pid:8).limit(1).each do |e|
     .contact_info{"data-original-title" => "Электронная почта"}
       %i.glyphicon.glyphicon-envelope
