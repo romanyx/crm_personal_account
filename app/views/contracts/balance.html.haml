@@ -5,7 +5,7 @@
     %div{class: "#{current_contract.balance_days_left > 5 ? 'green' : 'red'}"}
       - if current_contract.balance_summa < 0
         Ваш долг:
-        %b= current_contract.balance_summa
+        %b= current_contract.balance_summa.abs
         грн.
       - else
         Ваш баланс:
