@@ -33,7 +33,7 @@ class ContractsController < InheritedResources::Base
     elsif [0, 4].include?(params[:contract_status][:status].to_i)
       @status = current_contract.contract_statuses.build(params[:contract_status].merge(comment: 'Установлено пользователем', uid: 0))
       if @status.save
-        current_contract.update_attributes(status: 0) if params[:contract_status][:status].to_i == 4
+        current_contract.update_attributes(status: 0) if params[:contract_status][:status].to_i == 0
         redirect_to status_contract_path(1), flash: { notice: 'Статус поставлен в очередь' }
       else
         @statuses = current_contract.contract_status_logs.order('date DESC').paginate(page: (params[:id]||=1), per_page: 5)
