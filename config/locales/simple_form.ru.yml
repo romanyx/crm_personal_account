@@ -18,7 +18,7 @@ ru:
           password: "Пароль"
       ecconnect_payment:
         new:
-          amount: "Сумма"
+          amount: "Укажите сумму к оплате"
       contract_status:
         status: "Статус"
         date1: "С даты"
