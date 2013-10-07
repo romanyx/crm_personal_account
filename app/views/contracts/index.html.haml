@@ -34,7 +34,7 @@
       %i.glyphicon.glyphicon-dashboard.login
       %label
         = login.login
-%h4.contract_information Контактная информация
+%h4.contract_information Email
 = form_tag("contracts/update_contract", id: "contracts") do
   .form-group
     - email = current_contract.contract_parameter_type3.where(pid:8).limit(1).last
