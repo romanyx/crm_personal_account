@@ -13,6 +13,7 @@ CrmPersonalAccount::Application.routes.draw do
     member do
       get 'status'
       get 'balance'
+      get 'payment'
     end
   end
 end

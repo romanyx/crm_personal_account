@@ -19,7 +19,7 @@
       %i.glyphicon.glyphicon-envelope
       %label
         = e.email
-  - current_contract.ctariffs("date2 is NULL").each do |tp|
+  - current_contract.ctariffs.where("date2 is NULL").each do |tp|
     .contact_info{"data-original-title" => "Тариф"}
       %i.glyphicon.glyphicon-usd
       %label

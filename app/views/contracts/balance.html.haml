@@ -1,5 +1,5 @@
 - set_meta_tags title: "#{current_contract.title} баланс", description: "Ваш баланс на текущий момент" , keywords: "Крыминфоком, Инфоком, Infocom, Crimeainfocom, пополнить баланс, статистика, личный кабинет"
-%h4.contract_information Баланс
+%h4.contract_information Текущий баланс
 .balance
   .summa
     %div{class: "#{current_contract.balance_days_left > 5 ? 'green' : 'red'}"}
@@ -12,22 +12,34 @@
         %b= current_contract.balance_summa
         грн.
 = link_to "Оплатить кредитной картой", ecconnect.new_ecconnect_payment_path, class: 'contact_submit btn btn-primary btn-large'
-%br/
-%br/
-%table.table
+%h4.contract_information Баланс за период
+%table.table.table-hover
   %thead
-    %tr.active
-      %th Платежи
-      %th Комментарий
-      %th Дата
+    %tr
+      %th Период
+      %th Вход. Остаток
+      %th Оплата
+      %th Наработка
+      %th Расходы
+      %th Исх. Остаток
   %tbody
-    - @payments.each do |p|
+    - @balances.each do |b|
       %tr
         %td 
-          = p.summa 
+          = I18n.t("date.month_name")[b.mm]+' '+b.yy.to_s
+        %td 
+          = b.summa1 
           грн
         %td 
-          = p.comment
+          = b.summa2 
+          грн
         %td 
-          = I18n.l p.lm, format: :long
-= will_paginate @payments, renderer: BootstrapPagination::Rails, bootstrap: 3, param_name: 'id'
+          = b.summa3 
+          грн
+        %td 
+          = b.summa4
+          грн
+        %td
+          = b.summa1+b.summa2-b.summa3-b.summa4
+          грн
+= will_paginate @balances, renderer: BootstrapPagination::Rails, bootstrap: 3, param_name: 'id'
