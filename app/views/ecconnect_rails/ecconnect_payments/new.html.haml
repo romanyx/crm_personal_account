@@ -2,5 +2,5 @@
 = simple_form_for @ecconnect_payment, url: ecconnect.ecconnect_payments_path do |f|
   = f.input :amount, input_html: { class: 'form-control' }
   = f.input :payer_id, as: :hidden, input_html: { value: current_contract.id }
-  = f.input :purchase_desc, as: :hidden, input_html: { value: "Платеж #{@ecconnect_payment.order_id}, пополнение счета #{current_contract.title} - #{current_contract.comment}" }
+  = f.input :purchase_desc, as: :hidden, input_html: { value: "Оплата по договору №#{current_contract.title}" }
   = f.button :submit, class: 'btn-primary contact_submit'
