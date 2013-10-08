@@ -1,0 +1,19 @@
+- set_meta_tags title: "#{current_contract.title} баланс", description: "Ваши платежи" , keywords: "Крыминфоком, Инфоком, Infocom, Crimeainfocom, пополнить баланс, статистика, личный кабинет"
+%h4.contract_information История платежей
+%table.table.table-hover
+  %thead
+    %tr
+      %th Сумма
+      %th Комментарий
+      %th Дата
+  %tbody
+    - @payments.each do |p|
+      %tr
+        %td 
+          = p.summa 
+          грн
+        %td
+          = p.comment
+        %td 
+          = I18n.l p.lm, format: :long
+= will_paginate @payments, renderer: BootstrapPagination::Rails, bootstrap: 3, param_name: 'id'

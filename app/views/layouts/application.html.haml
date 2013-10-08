@@ -10,27 +10,30 @@
     .wrapper
       .container
         .row
+          .col-lg-12
+            - if flash[:notice]
+              .alert.alert-success.alert.alert-dismissable
+                = flash[:notice]
+                %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
+            - if flash[:error]
+              .alert.alert-danger.alert.alert-dismissable
+                = flash[:error]
+                %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
+        .row
           .col-lg-3
             %section.sidebar
-              .logo   
-                = image_tag('logo.jpg', class: "img-responsive")
+              %h2 Личный кабинет
               %ul.nav.nav-stacked
                 %li
                   = link_to "Профиль", main_app.root_path, class: current_page?(main_app.root_path) && 'active'
                 %li
                   = link_to "Баланс", main_app.balance_contract_path(1), class: current_page?(main_app.balance_contract_path(params[:id]||=1)) && 'active'
                 %li
+                  = link_to "Платежи", main_app.payment_contract_path(1), class: current_page?(main_app.payment_contract_path(params[:id]||=1)) && 'active'
+                %li
                   = link_to "Статус", main_app.status_contract_path(1), class: current_page?(main_app.status_contract_path(params[:id]||=1)) && 'active' 
                 %li
                   = link_to "Выйти", main_app.destroy_contract_session_path, :method => :delete
           .col-lg-9
             %section.content
-              - if flash[:notice]
-                .alert.alert-success.alert.alert-dismissable
-                  = flash[:notice]
-                  %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
-              - if flash[:error]
-                .alert.alert-danger.alert.alert-dismissable
-                  = flash[:error]
-                  %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} ×
               = yield
