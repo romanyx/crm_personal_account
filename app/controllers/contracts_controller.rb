@@ -8,7 +8,7 @@ class ContractsController < InheritedResources::Base
   	if current_contract.balance_days_left <= 5
       flash[:error] = "Пополните счет"
   	end
-    @balances = current_contract.balances.order('yy DESC').paginate(page: params[:id], per_page: 5)
+    @balances = current_contract.balances.order('yy DESC, mm ASC').paginate(page: params[:id], per_page: 5)
   end
   def payment
     @payments = current_contract.payments.order('dt DESC').paginate(page: params[:id], per_page: 5)
