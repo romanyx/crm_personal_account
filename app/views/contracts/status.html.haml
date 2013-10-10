@@ -5,11 +5,10 @@
   = f.input :date1, as: :string, input_html: { class: 'date_picker form-control text-control' }
   = f.input :date2, as: :string, input_html: { class: 'date_picker form-control text-control' }
   = f.button :submit, value: 'Изменить статус', class: 'contact_submit btn btn-primary btn-large', disabled: ![0, 4].include?(current_contract.status)
-%br/
-%br/
-%table.table
+%h4.contract_information История статусов
+%table.table.table-hover
   %thead
-    %tr.active
+    %tr
       %th Cтатус
       %th Комментарий
       %th С даты
