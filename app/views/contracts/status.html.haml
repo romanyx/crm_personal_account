@@ -23,9 +23,9 @@
           = p.comment
         %td
           - p p.date1.class
-          = I18n.l(p.date1, format: :long) if p.date1
+          = I18n.l(p.date1, format: :default) if p.date1
         %td 
-          = I18n.l(p.date2, format: :long) if p.date2
+          = I18n.l(p.date2, format: :default) if p.date2
         %td
           - @status_actives.each do |c|
             = I18n.l(c.date, format: :long) if p.date1.eql?(c.date1)
