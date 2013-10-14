@@ -26,6 +26,7 @@
           = I18n.l(p.date1, format: :long) if p.date1
         %td 
           = I18n.l(p.date2, format: :long) if p.date2
-        %td 
-          = I18n.l p.date, format: :long
+        %td
+          - @status_actives.each do |c|
+            = I18n.l(c.date, format: :long) if p.date1.eql?(c.date1)
 = will_paginate @statuses, renderer: BootstrapPagination::Rails, bootstrap: 3, param_name: 'id'
