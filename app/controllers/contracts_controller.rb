@@ -16,7 +16,9 @@ class ContractsController < InheritedResources::Base
   
   def status
     @status = current_contract.contract_statuses.build
-    @statuses = current_contract.contract_status_logs.order('date DESC').paginate(page: params[:id], per_page: 5)
+    #@statuses = current_contract.contract_status_logs.order('date DESC').paginate(page: params[:id], per_page: 5)
+    @statuses = current_contract.contract_statuses.order('date1 ASC').paginate(page: params[:id], per_page: 5)
+    @status_actives = current_contract.contract_status_logs
   end
 
   def update_contract
