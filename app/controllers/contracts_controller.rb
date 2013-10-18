@@ -10,8 +10,10 @@ class ContractsController < InheritedResources::Base
   	end
     @balances = current_contract.balances.order('yy DESC, mm ASC').paginate(page: params[:id], per_page: 5)
   end
+
   def payment
     @payments = current_contract.payments.order('dt DESC').paginate(page: params[:id], per_page: 5)
+    @options = ["test1", "test2"]
   end
   
   def status

@@ -5,6 +5,12 @@ CrmPersonalAccount::Application.routes.draw do
   mount EcconnectRails::Engine => "/ecconnect_rails", :as => "ecconnect"
 
   devise_for :contracts 
+  resources :monexyes, only: [:index] do
+    collection do
+      get 'success'
+      get 'failure'
+    end
+  end
   resources :contracts, only: [:index] do
     collection do
       post 'update_contract'
