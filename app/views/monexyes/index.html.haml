@@ -1,12 +1,15 @@
 - set_meta_tags title: "Пополнение счета", description: "Пополнение счета MoneXy" , keywords: "Крыминфоком, Инфоком, Infocom, Crimeainfocom, пополнить баланс, статистика, личный кабинет"
+
 %form#payment_send{action: "https://www.monexy.ua/merchant/merchant.php", method: "post"}
   %input{name: "myMonexyMerchantCurrency", type: "hidden", value: "UAH"}
   %input{name: "myMonexyMerchantExpTime", type: "hidden", value: "140"}
-  %input{name: "myMonexyMerchantID", type: "hidden", value: "103778580"}
-  %input{name: "myMonexyMerchantOrderDesc", type: "hidden", value: "#{current_contract.title}"}
+  %input{name: "myMonexyMerchantFailUrl", type: "hidden", value: "http://billing.crimeainfo.com/monexyes/failure"}
+  %input{name: "myMonexyMerchantID", type: "hidden",  value: "103778580"}
+  %input{name: "myMonexyMerchantOrderDesc", type: "hidden", value:"Оплата по договору №#{current_contract.title}"}
   %input{name: "myMonexyMerchantShopName", type: "hidden", value: "ООО Крыминфоком"}
+  %input{name: "myMonexyMerchantSuccessUrl", type: "hidden", value:"http://billing.crimeainfo.com/monexyes/success"}
   %label Укажите сумму к оплате
   %input{name: "myMonexyMerchantSum", class: 'form-control', type: "text", value: ""}
-  %input{name: "myMonexyMerchantHash", type: "hidden", value: "7b6cb4128b77057fbdc0f4caf27fb194"}
-  %input{name: "myMonexyPaymentSimple", type: "hidden", value: "1"}
+  %input{name: "myMonexyMerchantHash", type: "hidden", value: "b5fc30994eb2f2a0c1dd30d228aa2269"}
+  %input{name: "myMonexyPaymentSimple", type: "hidden", value:"1"}
   %input{type: "submit", value: "Далее", class: 'contact_submit btn btn-primary btn-large'}
