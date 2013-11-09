@@ -18,9 +18,8 @@ class ContractsController < InheritedResources::Base
   
   def status
     @status = current_contract.contract_statuses.build
-    #@statuses = current_contract.contract_status_logs.order('date DESC').paginate(page: params[:id], per_page: 5)
+    @statuslogs = current_contract.contract_status_logs.order('date ASC').paginate(page: params[:id], per_page: 5)
     @statuses = current_contract.contract_statuses.order('date1 ASC').paginate(page: params[:id], per_page: 5)
-    @status_actives = current_contract.contract_status_logs
   end
 
   def update_contract
@@ -35,6 +34,7 @@ class ContractsController < InheritedResources::Base
   end
 
   def change_status
+    @statuses = current_contract.contract_statuses.order('date1 ASC').paginate(page: params[:id], per_page: 5)
     if params[:contract_status][:status].to_i == current_contract.status
       redirect_to status_contract_path(1), flash: { error: 'Данный статус уже установлен' }
     elsif [0, 4].include?(params[:contract_status][:status].to_i)
@@ -43,7 +43,7 @@ class ContractsController < InheritedResources::Base
         current_contract.update_attributes(status: 0) if params[:contract_status][:status].to_i == 0
         redirect_to status_contract_path(1), flash: { notice: 'Статус поставлен в очередь' }
       else
-        @statuses = current_contract.contract_status_logs.order('date DESC').paginate(page: (params[:id]||=1), per_page: 5)
+        @statuslogs = current_contract.contract_status_logs.order('date ASC').paginate(page: (params[:id]||=1), per_page: 5)
         flash[:error] = 'Ошибка при изменении статуса'
         render 'status'
       end
