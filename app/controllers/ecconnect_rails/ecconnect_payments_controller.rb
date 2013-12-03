@@ -25,6 +25,9 @@ module EcconnectRails
         last_balance = contract.last_balance
         Balance.update_all "summa2=#{(ecconnect_payment.amount + last_balance.summa2)} where yy=#{last_balance.yy} and mm=#{last_balance.mm} and cid=#{last_balance.cid} limit 1"
         if ![0,4].include?(contract.status) && contract.balance_summa > contract.closesumma
+          Rails.logger.info contract.to_json
+          Rails.logger.info contract.last_balance.to_json
+          Rails.logger.info contract.last_balance.to_json
           contract.contract_statuses.build(status: 0, comment: 'Разблокировано системой', uid: 0, date1: Time.now).save
           contract.update_attributes status: 0
         end
