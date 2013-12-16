@@ -2,7 +2,7 @@
 class ContractStatus < ActiveRecord::Base
   self.table_name =  "contract_status"
 
-  attr_accessible :status, :date1, :date2, :comment, :uid
+  attr_accessible :status, :date1, :date2, :comment, :uid, :cid
 
   belongs_to :contract, :class_name => 'Contract', :foreign_key => 'cid'
 

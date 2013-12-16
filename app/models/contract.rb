@@ -4,6 +4,8 @@ class Contract < ActiveRecord::Base
   self.table_name =  "contract"
   self.primary_key = "id"
 
+  attr_accessible :status
+
   has_many :phones, :class_name => "Phone", :foreign_key => "cid"
 
   has_many :agent_payments

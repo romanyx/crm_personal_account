@@ -27,12 +27,13 @@ module EcconnectRails
         if ![0,4].include?(contract.status) && contract.balance_summa > contract.closesumma
           Rails.logger.info contract.to_json
           Rails.logger.info contract.last_balance.to_json
-          Rails.logger.info contract.last_balance.to_json
           contract.contract_statuses.build(status: 0, comment: 'Разблокировано системой', uid: 0, date1: Time.now).save
-          contract.update_attributes status: 0
+          Rails.logger.info contract.status.to_json
+          contract.update_attributes(status: 0)
+          Rails.logger.info contract.status.to_json
         end
         ecconnect_payment.update_attributes status: true
-        PaymentMailer.delay.upc contract, payment
+        #PaymentMailer.delay.upc_added contract, payment
       end
     end
 
