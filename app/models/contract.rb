@@ -4,7 +4,7 @@ class Contract < ActiveRecord::Base
   self.table_name =  "contract"
   self.primary_key = "id"
 
-  attr_accessible :status
+  attr_accessible :title, :pswd, :password, :encrypted_password, :status
 
   has_many :phones, :class_name => "Phone", :foreign_key => "cid"
 
@@ -51,8 +51,6 @@ class Contract < ActiveRecord::Base
   
 
   devise :database_authenticatable, :authentication_keys => [:title] 
-
-  attr_accessible :title, :pswd, :password, :encrypted_password, :status
   
   def valid_password?(password)
   	return false if pswd.blank?
