@@ -22,17 +22,20 @@ module EcconnectRails
       if !ecconnect_payment.status
         contract = Contract.find ecconnect_payment.payer_id
         last_balance = contract.last_balance
-        last_status = contract.contract_statuses.last
-        if ![0,4].include?(contract.status) && last_status.date1.eql?(Time.now.to_date)
-          last_status.delete
-        end
-        if ![0,4].include?(contract.status) && last_status.date2.eql?(nil)
-          last_status.update_attributes(date2: Time.now-1.day)
-        end
         payment = Payment.create! dt: Time.now, cid: contract.id, pt: 1, uid: 11, summa: ecconnect_payment.amount, lm: Time.now, comment: "UPC карта #{ecconnect_payment.proxy_pan} код #{ecconnect_payment.approval_code}"
         Balance.update_all "summa2=#{(ecconnect_payment.amount + last_balance.summa2)} where yy=#{last_balance.yy} and mm=#{last_balance.mm} and cid=#{last_balance.cid} limit 1"
         if ![0,4].include?(contract.status) && contract.balance_summa + ecconnect_payment.amount > contract.closesumma
-          contract.contract_statuses.build(status: 0, comment: 'Разблокировано электронным платежом', uid: 11, date1: Time.now).save
+          time = Time.now
+          if contract.contract_statuses.where(date1: time.to_date).count > 0
+            contract.contract_statuses.where(date1: time.to_date).delete_all
+            contract.contract_status_logs.where(date1: time.to_date).delete_all
+          end
+          if contract.contract_statuses.last.date2.nil?
+            contract.contract_statuses.last.update_attributes(date2: time-1.day)
+            contract.contract_status_logs.last.update_attributes(date2: time-1.day)
+          end
+          contract.contract_statuses.create status: 0, comment: 'Разблокировано электронным платежом', uid: 11, date1: time
+          contract.contract_status_logs.create date1: time, comment: 'Разблокировано электронным платежом', uid: 11, status: 0, date: time
           contract.update_attributes(status: 0)
         end
         ecconnect_payment.update_attributes status: true
