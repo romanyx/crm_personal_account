@@ -1,0 +1,16 @@
+%link{href: "http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css", rel: "stylesheet", type: "text/css"}/
+%h4 Поступила оплата по договору с использованием платежной карты (система UPC).
+%table.table.table-bordered
+  %thead
+    %tr
+      %th
+        Договор
+      %th
+        Сумма
+  %tbody
+    %tr
+      %td= @payment.contract.title + " - " + @payment.contract.comment
+      %td= @payment.summa.to_s + " грн"
+%br
+%br
+%p Сообщение сгенерировано ООО Крыминофоком -  "Личный кабинет".

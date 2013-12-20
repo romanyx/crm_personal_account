@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130426065922) do
+ActiveRecord::Schema.define(:version => 20131025074956) do
 
   create_table "_contract_status_bak_bir", :id => false, :force => true do |t|
     t.integer "id",                     :default => 0, :null => false
@@ -79,11 +79,13 @@ ActiveRecord::Schema.define(:version => 20130426065922) do
     t.integer  "contract_id"
     t.integer  "user_id"
     t.integer  "manager_id"
-    t.decimal  "value",       :precision => 10, :scale => 0
+    t.decimal  "value",           :precision => 10, :scale => 0
     t.string   "text"
     t.datetime "managed_at"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+    t.integer  "confirmation_id"
+    t.datetime "confirmation_at"
   end
 
   add_index "agent_payments", ["contract_id"], :name => "index_agent_payments_on_contract_id"
