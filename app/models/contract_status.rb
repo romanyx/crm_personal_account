@@ -12,6 +12,8 @@ class ContractStatus < ActiveRecord::Base
   #validates :date1, date: { before: :date2 } if :date2_exist?
   #validates :date2, date: { after: :date1 }, allow_nil: true
 
+  default_scope { order('id ASC') }
+
 
   def date2_exist?
     !self.date2.nil?

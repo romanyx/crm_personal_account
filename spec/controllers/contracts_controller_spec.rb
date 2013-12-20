@@ -25,7 +25,7 @@ describe ContractsController do
     end
     context 'authorized' do
       it{ response.should render_template 'balance' }
-      #it{ assigns(:balances).should == contract.balances.order('yy DESC').paginate(page: 1, per_page: 5)}
+      it{ assigns(:balances).should == contract.balances.order('yy DESC, mm ASC').paginate(page: 1, per_page: 5)}
     end
   end
 
