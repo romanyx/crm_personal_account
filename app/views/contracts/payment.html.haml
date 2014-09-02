@@ -1,7 +1,6 @@
 - set_meta_tags title: "#{current_contract.title} баланс", description: "Ваши платежи" , keywords: "Крыминфоком, Инфоком, Infocom, Crimeainfocom, пополнить баланс, статистика, личный кабинет"
 %h4.contract_information Способы оплаты
 = link_to "Оплатить платежной карточкой", ecconnect.new_ecconnect_payment_path, class: 'contact_submit btn btn-primary btn-large'
-= #link_to "MoneXy (тестирование)", monexyes_path, class: 'contact_submit btn btn-primary btn-large'
 %h4.contract_information История платежей
 %table.table.table-hover
   %thead

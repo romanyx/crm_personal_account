@@ -1,5 +1,5 @@
 development:
-  host: 172.28.200.3
+  host: localhost
   port: 3306
   adapter: mysql2
   database: bgbilling_development
@@ -8,22 +8,24 @@ development:
   pool: 5
   timeout: 5000
 
-test:
-  host: 172.28.200.3
-  port: 3306
-  adapter: mysql2
-  database: bgbilling_test
-  username: bill
-  password: bgbilling
-  pool: 5
-  timeout: 5000
-
 production:
-  host: 194.54.152.48
-  port: 3306
   adapter: mysql2
+  encoding: utf8
+  reconnect: true
+  host: 194.54.152.48
   database: bgbilling
+  pool: 5
   username: bill
   password: bgbilling
+  socket: /var/run/mysqld/mysqld.sock
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  host: 127.0.0.1
+  database: bgbilling_test
   pool: 5
-  timeout: 5000
+  username: test
+  password: test_pass
+  socket: /var/run/mysqld/mysqld.sock

@@ -25,7 +25,8 @@ class ContractsController < InheritedResources::Base
   def update_contract
     email = current_contract.update_email params[:email]
     sms = current_contract.update_sms params[:sms]
-    error = (email.errors.full_messages + sms.errors.full_messages).join(', ')
+    phone = current_contract.update_mobile_phone params[:mobile]
+    error = (email.errors.full_messages + sms.errors.full_messages + phone.errors.full_messages).join(', ')
     if error.blank?
       error = nil 
       notice = 'Данные обновлены'

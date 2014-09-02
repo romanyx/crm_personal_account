@@ -93,6 +93,17 @@ class Contract < ActiveRecord::Base
     current_email
   end
 
+  def update_mobile_phone mobile
+    current_mobile = self.phones.where(pid: 14).last
+    if current_mobile.nil?
+      current_mobile = self.phones.build(pid: 14, value: mobile)
+      current_mobile.save
+    else
+      current_mobile.update_attributes(value: mobile) if !current_mobile.nil?  
+    end
+    current_mobile
+  end
+
   def update_sms flag
     sms = self.flags.where(pid: 46).last
     if flag.nil?
