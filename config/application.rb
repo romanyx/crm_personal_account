@@ -33,7 +33,9 @@ module CrmPersonalAccount
     # Activate observers that should always be running.
     config.active_record.observers = :payment_observer
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
-
+    config.generators do |g| 
+      g.orm :active_record 
+    end
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
@@ -47,7 +49,7 @@ module CrmPersonalAccount
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
-    config.time_zone = 'Kyiv' 
+    config.time_zone = 'Moscow' 
 
     config.before_configuration do
       I18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]

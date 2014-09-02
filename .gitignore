@@ -12,3 +12,5 @@ log/*.log
 *.sql
 
 # Ignore application configuration
+# Ignore application configuration
+/config/application.yml

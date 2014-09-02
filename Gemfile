@@ -11,6 +11,7 @@ gem 'date_validator'
 gem 'ecconnect_rails', '>= 0.0.4'
 gem 'rvm-capistrano'
 gem 'daemons'
+gem 'figaro'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -23,7 +24,7 @@ group :assets do
   #gem 'compass-rails'
   gem 'uglifier', '>= 1.0.3'
   #gem "jquery-fileupload-rails"
-  gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass', branch: '3'
+  gem 'bootstrap-sass'
   #gem 'angular-rails'
   #gem 'showdown-rails'
 end
@@ -55,6 +56,8 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "jasminerice"
   gem 'mongoid-rspec'
+  gem 'zeus'
+  gem 'webmock'
 end
 
 gem 'cache_digests'

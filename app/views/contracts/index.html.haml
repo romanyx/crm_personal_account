@@ -34,9 +34,15 @@
       %i.glyphicon.glyphicon-dashboard.login
       %label
         = login.login
-%h4.contract_information E-mail
+%h4.contract_information Контакты
 = form_tag("contracts/update_contract", id: "contracts") do
   .form-group
+    - phone = current_contract.phones.where(pid: 14).last
+    - if phone.nil?
+      = text_field_tag("mobile", nil, { class: 'form-control', "data-original-title" => "Мобильный телефон" })
+    - else
+      = text_field_tag("mobile", phone.value, {class: 'form-control text-control', "data-original-title" => "Мобильный телефон" })
+
     - email = current_contract.contract_parameter_type3.where(pid:8).limit(1).last
     - if email.nil?
       = email_field_tag("email", "", {class: 'form-control', "data-original-title" => "Электронная почта"})
