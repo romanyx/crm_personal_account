@@ -30,17 +30,17 @@
           = I18n.t("date.month_name")[b.mm]+' '+b.yy.to_s
         %td 
           = b.summa1 
-          грн
+          руб.
         %td 
           = b.summa2 
-          грн
+          руб.
         %td 
           = b.summa3 
-          грн
+          руб
         %td 
           = b.summa4
-          грн
+          руб.
         %td
           = b.summa1+b.summa2-b.summa3-b.summa4
-          грн
+          руб.
 = will_paginate @balances, renderer: BootstrapPagination::Rails, bootstrap: 3, param_name: 'id'
