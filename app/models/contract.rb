@@ -81,6 +81,13 @@ class Contract < ActiveRecord::Base
       end
     end
   end
+  
+  #russian sms
+  def russian_mobile
+    phone = phones.where(pid: 14).first
+    phone = phone.value if phone.present?
+    (phone =~ /^79\d{9}$/)? "+" + phone : nil
+  end
 
   def update_email email
     current_email = self.contract_parameter_type3.where(pid: 8).last
