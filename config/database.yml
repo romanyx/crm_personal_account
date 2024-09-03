@@ -12,11 +12,11 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: true
-  host: 194.54.152.48
+  host: localhost
   database: bgbilling
   pool: 5
-  username: bill
-  password: bgbilling
+  username: user
+  password: password
   socket: /var/run/mysqld/mysqld.sock
 
 test:
