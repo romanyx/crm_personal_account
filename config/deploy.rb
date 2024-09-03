@@ -11,7 +11,7 @@ set :application, "crm_personal_account"
 set :repository,  "git@github.com:Supro/crm_personal_account.git"
 
 set :scm, :git
-set :user, "root"
+set :user, "user"
 set :use_sudo, false
 
 set :branch, "master"
@@ -19,7 +19,7 @@ set :deploy_via, :remote_cache
 set :keep_releases, 3
 set :deploy_to, "/var/www/apps/#{application}"
 set :rails_env, "production"
-set :domain, "194.54.152.23"
+set :domain, "domain_ip"
 set :scm_command, "/usr/bin/git"
 set :scm_verbose, true
 set :normalize_asset_timestamps, false
